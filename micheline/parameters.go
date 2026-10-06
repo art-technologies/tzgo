@@ -175,8 +175,8 @@ func (p *Parameters) UnmarshalJSON(data []byte) error {
 		return json.Unmarshal(data, &p.Value)
 	} else {
 		// try entrypoint calling convention
-		type alias *Parameters
-		if err := json.Unmarshal(data, alias(p)); err != nil {
+		type alias Parameters
+		if err := json.Unmarshal(data, (*alias)(p)); err != nil {
 			return err
 		}
 		if p.Value.IsValid() {
